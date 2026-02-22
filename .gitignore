@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+
+# Data files (tracked by DVC instead)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Logs
+logs/*.log
+
+# Airflow
+airflow.db
+airflow.cfg
+standalone_admin_password.txt
+
+# DVC cache
+data/dvc_cache/
+
+# Mac
+.DS_Store
