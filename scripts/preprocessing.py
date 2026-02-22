@@ -201,6 +201,76 @@ def process_record(record: dict) -> dict | None:
         "error_keywords_found":        json.dumps(error_info["error_keywords_found"]),
     }
 
+def remap_to_chatml(record: dict) -> dict:
+    """
+    Remap processed Glaive record to AutoMend ChatML format.
+    
+    Converts Glaive's function calling format into the standardized
+    ChatML format required for Llama-3 fine-tuning.
+    
+    Format B (from scoping doc):
+    {
+        "messages": [
+            {"role": "system", "content": "You are AutoMend. Available Tools: [...]"},
+            {"role": "user", "content": "..."},
+            {"role": "assistant", "content": "{\"workflow\": {\"steps\": [...]}}"}
+        ]
+    }
+    """
+    system  = record.get("system", "")
+    chat    = record.get("chat", "")
+    calls   = json.loads(record.get("function_calls", "[]"))
+
+    #  Extract user message──────────────────────────────────────────────
+    # Get first USER: turn from chat
+    user_match = re.search(r"USER:\s*(.*?)(?=ASSISTANT:|$)", chat, re.DOTALL)
+    user_content = user_match.group(1).strip() if user_match else chat[:200]
+
+    #  Build AutoMend system prompt
+    # Keep original tool definitions from Glaive system prompt
+    # This teaches model to respect provided context (per scoping doc)
+    tool_definitions = record.get("function_signatures", "{}")
+    system_content = (
+        f"You are AutoMend, an MLOps remediation engine. "
+        f"Convert user requests into valid JSON workflow definitions.\n"
+        f"Available Tools: {tool_definitions}"
+    )
+
+    #  Build assistant response in AutoMend workflow format 
+    if calls and not any("__malformed__" in c for c in calls):
+        # Convert Glaive function calls to AutoMend workflow.steps format
+        steps = []
+        for call in calls:
+            step = {
+                "tool":   call.get("name", "unknown"),
+                "params": call.get("arguments", {}),
+            }
+            steps.append(step)
+        assistant_content = json.dumps({"workflow": {"steps": steps}}, indent=2)
+    else:
+        # No function call — assistant declined or no action needed
+        assistant_match = re.search(
+            r"ASSISTANT:\s*(.*?)(?=USER:|<\|endoftext\|>|$)",
+            chat, re.DOTALL
+        )
+        raw_response = assistant_match.group(1).strip() if assistant_match else ""
+        assistant_content = json.dumps({
+            "workflow": {"steps": []},
+            "message":  raw_response[:200]
+        })
+
+    return {
+        "messages": [
+            {"role": "system",    "content": system_content},
+            {"role": "user",      "content": user_content},
+            {"role": "assistant", "content": assistant_content},
+        ],
+        # Keep metadata for filtering/analysis
+        "complexity_tier":  record.get("complexity_tier"),
+        "has_error_handling": record.get("has_error_handling"),
+        "num_turns":        record.get("num_turns"),
+        "num_calls":        record.get("num_calls"),
+    }
 
 def run_preprocessing(
     raw_file: Path = RAW_FILE,
@@ -250,7 +320,22 @@ def run_preprocessing(
         for record in processed:
             f.write(json.dumps(record, ensure_ascii=False) + "\n")
 
+
+
     logger.info("Preprocessing complete.")
+
+    # ChatML Remapping
+    # Remap all 5000 records to ChatML format for fine tuning
+    logger.info("Remapping %d records to ChatML format...", len(processed))
+    chatml_records = [remap_to_chatml(r) for r in processed]
+
+    chatml_file = PROCESSED_DIR / "glaive_chatml.jsonl"
+    with open(chatml_file, "w", encoding="utf-8") as f:
+        for record in chatml_records:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+
+    logger.info("ChatML file saved: %d records to %s", len(chatml_records), chatml_file)
+
     return df
 
 
@@ -262,3 +347,10 @@ if __name__ == "__main__":
     print(f"\nMalformed records:            {df['has_malformed'].sum()}")
     print(f"Records with error handling:  {df['has_error_handling'].sum()}")
     print(f"Avg defined functions:        {df['num_defined_functions'].mean():.2f}")
+    # Print sample ChatML record for verification
+    print("\nSample ChatML record:")
+    with open(PROCESSED_DIR / "glaive_chatml.jsonl") as f:
+        sample = json.loads(f.readline())
+    for msg in sample["messages"]:
+        print(f"\nRole: {msg['role']}")
+        print(f"Content: {msg['content'][:200]}")
