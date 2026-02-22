@@ -13,6 +13,7 @@ data/processed/*
 !data/processed/.gitkeep
 !data/raw/*.dvc
 !data/processed/*.dvc
+!data/processed/validation/
 
 # Logs
 logs/*.log
