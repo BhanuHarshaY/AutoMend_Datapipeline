@@ -1,0 +1,275 @@
+{
+  "total_records": 5000,
+  "slices_analyzed": 6,
+  "findings_count": 3,
+  "bias_detected": true,
+  "findings": [
+    {
+      "slice_column": "complexity_tier",
+      "slice_value": "malformed",
+      "proportion": 0.0014,
+      "count": 7,
+      "severity": "high",
+      "recommendation": "Slice 'malformed' in 'complexity_tier' represents only 0.14% of data. Consider oversampling or collecting more examples."
+    },
+    {
+      "slice_column": "turn_bucket",
+      "slice_value": "long",
+      "proportion": 0.0234,
+      "count": 117,
+      "severity": "medium",
+      "recommendation": "Slice 'long' in 'turn_bucket' represents only 2.34% of data. Consider oversampling or collecting more examples."
+    },
+    {
+      "slice_column": "call_bucket",
+      "slice_value": "many_calls",
+      "proportion": 0.0082,
+      "count": 41,
+      "severity": "high",
+      "recommendation": "Slice 'many_calls' in 'call_bucket' represents only 0.82% of data. Consider oversampling or collecting more examples."
+    }
+  ],
+  "mitigations": [
+    {
+      "slice_column": "complexity_tier",
+      "slice_value": "malformed",
+      "strategy": "oversample",
+      "detail": "Apply SMOTE or random oversampling to 'malformed' slice to bring representation above 5 percent threshold."
+    },
+    {
+      "slice_column": "turn_bucket",
+      "slice_value": "long",
+      "strategy": "collect_more",
+      "detail": "Collect additional examples for 'long' slice or apply sample weights during fine tuning."
+    },
+    {
+      "slice_column": "call_bucket",
+      "slice_value": "many_calls",
+      "strategy": "oversample",
+      "detail": "Apply SMOTE or random oversampling to 'many_calls' slice to bring representation above 5 percent threshold."
+    }
+  ],
+  "slice_statistics": {
+    "complexity_tier": [
+      {
+        "slice_column": "complexity_tier",
+        "slice_value": "complex",
+        "count": 907,
+        "proportion": 0.1814,
+        "avg_turns": 2.64,
+        "avg_calls": 2.05,
+        "malformed_count": 2,
+        "error_handling_pct": 0.0077,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "complexity_tier",
+        "slice_value": "malformed",
+        "count": 7,
+        "proportion": 0.0014,
+        "avg_turns": 2.29,
+        "avg_calls": 1.0,
+        "malformed_count": 7,
+        "error_handling_pct": 0.0,
+        "is_underrepresented": true
+      },
+      {
+        "slice_column": "complexity_tier",
+        "slice_value": "moderate",
+        "count": 517,
+        "proportion": 0.1034,
+        "avg_turns": 1.91,
+        "avg_calls": 1.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.0155,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "complexity_tier",
+        "slice_value": "none",
+        "count": 2218,
+        "proportion": 0.4436,
+        "avg_turns": 2.84,
+        "avg_calls": 0.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.1411,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "complexity_tier",
+        "slice_value": "simple",
+        "count": 1351,
+        "proportion": 0.2702,
+        "avg_turns": 1.75,
+        "avg_calls": 1.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.0067,
+        "is_underrepresented": false
+      }
+    ],
+    "turn_bucket": [
+      {
+        "slice_column": "turn_bucket",
+        "slice_value": "single",
+        "count": 1266,
+        "proportion": 0.2532,
+        "avg_turns": 1.0,
+        "avg_calls": 0.51,
+        "malformed_count": 0,
+        "error_handling_pct": 0.0016,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "turn_bucket",
+        "slice_value": "short",
+        "count": 2912,
+        "proportion": 0.5824,
+        "avg_turns": 2.32,
+        "avg_calls": 1.05,
+        "malformed_count": 9,
+        "error_handling_pct": 0.0611,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "turn_bucket",
+        "slice_value": "medium",
+        "count": 705,
+        "proportion": 0.141,
+        "avg_turns": 4.71,
+        "avg_calls": 0.05,
+        "malformed_count": 0,
+        "error_handling_pct": 0.1986,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "turn_bucket",
+        "slice_value": "long",
+        "count": 117,
+        "proportion": 0.0234,
+        "avg_turns": 6.15,
+        "avg_calls": 0.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.1453,
+        "is_underrepresented": true
+      }
+    ],
+    "call_bucket": [
+      {
+        "slice_column": "call_bucket",
+        "slice_value": "no_calls",
+        "count": 2218,
+        "proportion": 0.4436,
+        "avg_turns": 2.84,
+        "avg_calls": 0.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.1411,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "call_bucket",
+        "slice_value": "one_call",
+        "count": 1875,
+        "proportion": 0.375,
+        "avg_turns": 1.8,
+        "avg_calls": 1.0,
+        "malformed_count": 7,
+        "error_handling_pct": 0.0091,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "call_bucket",
+        "slice_value": "two_calls",
+        "count": 866,
+        "proportion": 0.1732,
+        "avg_turns": 2.62,
+        "avg_calls": 2.0,
+        "malformed_count": 2,
+        "error_handling_pct": 0.0081,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "call_bucket",
+        "slice_value": "many_calls",
+        "count": 41,
+        "proportion": 0.0082,
+        "avg_turns": 3.02,
+        "avg_calls": 3.0,
+        "malformed_count": 0,
+        "error_handling_pct": 0.0,
+        "is_underrepresented": true
+      }
+    ],
+    "has_error_handling": [
+      {
+        "slice_column": "has_error_handling",
+        "slice_value": "False",
+        "count": 4663,
+        "proportion": 0.9326,
+        "avg_turns": 2.34,
+        "avg_calls": 0.79,
+        "malformed_count": 9,
+        "error_handling_pct": 0.0,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "has_error_handling",
+        "slice_value": "True",
+        "count": 337,
+        "proportion": 0.0674,
+        "avg_turns": 3.41,
+        "avg_calls": 0.09,
+        "malformed_count": 0,
+        "error_handling_pct": 1.0,
+        "is_underrepresented": false
+      }
+    ],
+    "has_parallel": [
+      {
+        "slice_column": "has_parallel",
+        "slice_value": "False",
+        "count": 4093,
+        "proportion": 0.8186,
+        "avg_turns": 2.36,
+        "avg_calls": 0.46,
+        "malformed_count": 7,
+        "error_handling_pct": 0.0806,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "has_parallel",
+        "slice_value": "True",
+        "count": 907,
+        "proportion": 0.1814,
+        "avg_turns": 2.64,
+        "avg_calls": 2.05,
+        "malformed_count": 2,
+        "error_handling_pct": 0.0077,
+        "is_underrepresented": false
+      }
+    ],
+    "has_defined_functions": [
+      {
+        "slice_column": "has_defined_functions",
+        "slice_value": "False",
+        "count": 2222,
+        "proportion": 0.4444,
+        "avg_turns": 3.12,
+        "avg_calls": 0.4,
+        "malformed_count": 1,
+        "error_handling_pct": 0.1445,
+        "is_underrepresented": false
+      },
+      {
+        "slice_column": "has_defined_functions",
+        "slice_value": "True",
+        "count": 2778,
+        "proportion": 0.5556,
+        "avg_turns": 1.85,
+        "avg_calls": 1.03,
+        "malformed_count": 8,
+        "error_handling_pct": 0.0058,
+        "is_underrepresented": false
+      }
+    ]
+  }
+}
