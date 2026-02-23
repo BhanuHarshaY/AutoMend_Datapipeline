@@ -1,4 +1,3 @@
-Here is a professional, comprehensive `README.md` drafted specifically for your AutoMend project, mirroring the standard set by your friend's repository but tailored to your LLM function-calling pipeline.
 
 ---
 
@@ -70,7 +69,7 @@ AutoMend_Datapipeline/
 * [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 * Python 3.8+ (for local testing)
 
-### 1. Clone the repo and set up environment
+### 1. Clone the repo and set up the environment
 
 ```bash
 git clone https://github.com/BhanuHarshaY/AutoMend_Datapipeline.git
