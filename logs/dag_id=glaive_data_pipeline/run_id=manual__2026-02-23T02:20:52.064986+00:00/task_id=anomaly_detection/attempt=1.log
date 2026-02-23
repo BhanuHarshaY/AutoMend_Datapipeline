@@ -1,0 +1,25 @@
+[2026-02-23T02:21:06.138+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: glaive_data_pipeline.anomaly_detection manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:06.140+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: glaive_data_pipeline.anomaly_detection manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:06.140+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2026-02-23T02:21:06.145+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): anomaly_detection> on 2026-02-23 02:20:52.064986+00:00
+[2026-02-23T02:21:06.147+0000] {standard_task_runner.py:60} INFO - Started process 230 to run task
+[2026-02-23T02:21:06.148+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'glaive_data_pipeline', 'anomaly_detection', 'manual__2026-02-23T02:20:52.064986+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/glaive_pipeline_dag.py', '--cfg-path', '/tmp/tmp7u8wn8g9']
+[2026-02-23T02:21:06.149+0000] {standard_task_runner.py:88} INFO - Job 6: Subtask anomaly_detection
+[2026-02-23T02:21:06.164+0000] {task_command.py:423} INFO - Running <TaskInstance: glaive_data_pipeline.anomaly_detection manual__2026-02-23T02:20:52.064986+00:00 [running]> on host 64e07737f5a7
+[2026-02-23T02:21:06.183+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='bhanu_harsha' AIRFLOW_CTX_DAG_ID='glaive_data_pipeline' AIRFLOW_CTX_TASK_ID='anomaly_detection' AIRFLOW_CTX_EXECUTION_DATE='2026-02-23T02:20:52.064986+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-23T02:20:52.064986+00:00'
+[2026-02-23T02:21:06.188+0000] {anomaly_detection.py:150} INFO - Loading processed data from /opt/airflow/data/processed/glaive_processed.jsonl
+[2026-02-23T02:21:06.246+0000] {anomaly_detection.py:158} INFO - Loaded 5000 records
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:174} INFO - --- Anomaly Detection Results ---
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | malformed_rate | value=0.0018 | threshold=0.0500
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | none_complexity_rate | value=0.4436 | threshold=0.6000
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | record_count | value=5000.0000 | threshold=4000.0000
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | avg_turns | value=2.4126 | threshold=10.0000
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | avg_calls | value=0.7460 | threshold=5.0000
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:177} INFO -  OK | defined_functions_coverage | value=0.5556 | threshold=0.3000
+[2026-02-23T02:21:06.248+0000] {anomaly_detection.py:193} INFO - No anomalies detected — pipeline healthy 
+[2026-02-23T02:21:06.249+0000] {anomaly_detection.py:205} INFO - Anomaly report saved to /opt/airflow/data/processed/validation/anomaly_report.json
+[2026-02-23T02:21:06.251+0000] {glaive_pipeline_dag.py:111} INFO - Anomaly detection: 0 anomalies found
+[2026-02-23T02:21:06.256+0000] {python.py:202} INFO - Done. Returned value was: 0
+[2026-02-23T02:21:06.263+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=glaive_data_pipeline, task_id=anomaly_detection, execution_date=20260223T022052, start_date=20260223T022106, end_date=20260223T022106
+[2026-02-23T02:21:06.286+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-23T02:21:06.295+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

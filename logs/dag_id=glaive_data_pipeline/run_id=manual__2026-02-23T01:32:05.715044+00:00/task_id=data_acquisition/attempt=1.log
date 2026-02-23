@@ -1,0 +1,28 @@
+[2026-02-23T01:32:07.602+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: glaive_data_pipeline.data_acquisition manual__2026-02-23T01:32:05.715044+00:00 [queued]>
+[2026-02-23T01:32:07.604+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: glaive_data_pipeline.data_acquisition manual__2026-02-23T01:32:05.715044+00:00 [queued]>
+[2026-02-23T01:32:07.605+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2026-02-23T01:32:07.608+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): data_acquisition> on 2026-02-23 01:32:05.715044+00:00
+[2026-02-23T01:32:07.609+0000] {standard_task_runner.py:60} INFO - Started process 111 to run task
+[2026-02-23T01:32:07.611+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'glaive_data_pipeline', 'data_acquisition', 'manual__2026-02-23T01:32:05.715044+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/glaive_pipeline_dag.py', '--cfg-path', '/tmp/tmpcrtygjt6']
+[2026-02-23T01:32:07.612+0000] {standard_task_runner.py:88} INFO - Job 3: Subtask data_acquisition
+[2026-02-23T01:32:07.635+0000] {task_command.py:423} INFO - Running <TaskInstance: glaive_data_pipeline.data_acquisition manual__2026-02-23T01:32:05.715044+00:00 [running]> on host bd8ef49393a2
+[2026-02-23T01:32:07.656+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='bhanu_harsha' AIRFLOW_CTX_DAG_ID='glaive_data_pipeline' AIRFLOW_CTX_TASK_ID='data_acquisition' AIRFLOW_CTX_EXECUTION_DATE='2026-02-23T01:32:05.715044+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-23T01:32:05.715044+00:00'
+[2026-02-23T01:32:07.658+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 200, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 217, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/glaive_pipeline_dag.py", line 43, in task_data_acquisition
+    from data_acquisition import fetch_and_save
+  File "/opt/airflow/scripts/data_acquisition.py", line 11, in <module>
+    from datasets import load_dataset
+ModuleNotFoundError: No module named 'datasets'
+[2026-02-23T01:32:07.662+0000] {taskinstance.py:1149} INFO - Marking task as UP_FOR_RETRY. dag_id=glaive_data_pipeline, task_id=data_acquisition, execution_date=20260223T013205, start_date=20260223T013207, end_date=20260223T013207
+[2026-02-23T01:32:07.666+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 3 for task data_acquisition (No module named 'datasets'; 111)
+[2026-02-23T01:32:07.709+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-23T01:32:07.719+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

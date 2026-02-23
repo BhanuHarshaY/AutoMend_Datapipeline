@@ -1,0 +1,27 @@
+[2026-02-23T02:21:10.112+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: glaive_data_pipeline.pipeline_summary manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:10.115+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: glaive_data_pipeline.pipeline_summary manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:10.116+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2026-02-23T02:21:10.119+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): pipeline_summary> on 2026-02-23 02:20:52.064986+00:00
+[2026-02-23T02:21:10.121+0000] {standard_task_runner.py:60} INFO - Started process 314 to run task
+[2026-02-23T02:21:10.123+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'glaive_data_pipeline', 'pipeline_summary', 'manual__2026-02-23T02:20:52.064986+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/glaive_pipeline_dag.py', '--cfg-path', '/tmp/tmpk8z4g8m_']
+[2026-02-23T02:21:10.124+0000] {standard_task_runner.py:88} INFO - Job 9: Subtask pipeline_summary
+[2026-02-23T02:21:10.148+0000] {task_command.py:423} INFO - Running <TaskInstance: glaive_data_pipeline.pipeline_summary manual__2026-02-23T02:20:52.064986+00:00 [running]> on host 64e07737f5a7
+[2026-02-23T02:21:10.170+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='bhanu_harsha' AIRFLOW_CTX_DAG_ID='glaive_data_pipeline' AIRFLOW_CTX_TASK_ID='pipeline_summary' AIRFLOW_CTX_EXECUTION_DATE='2026-02-23T02:20:52.064986+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-23T02:20:52.064986+00:00'
+[2026-02-23T02:21:10.182+0000] {glaive_pipeline_dag.py:194} INFO - Pipeline Summary: {'pipeline': 'Glaive Function Calling v2', 'run_date': '2026-02-23 02:21:10.182422', 'record_count': 5000, 'processed_count': 5000, 'validation_passed': 30, 'anomalies_found': 0, 'bias_findings': 3, 'status': 'SUCCESS'}
+[2026-02-23T02:21:10.182+0000] {logging_mixin.py:188} INFO - 
+==================================================
+[2026-02-23T02:21:10.182+0000] {logging_mixin.py:188} INFO -        PIPELINE SUMMARY
+[2026-02-23T02:21:10.182+0000] {logging_mixin.py:188} INFO - ==================================================
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   pipeline                  Glaive Function Calling v2
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   run_date                  2026-02-23 02:21:10.182422
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   record_count              5000
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   processed_count           5000
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   validation_passed         30
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   anomalies_found           0
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   bias_findings             3
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO -   status                    SUCCESS
+[2026-02-23T02:21:10.183+0000] {logging_mixin.py:188} INFO - ==================================================
+[2026-02-23T02:21:10.183+0000] {python.py:202} INFO - Done. Returned value was: {'pipeline': 'Glaive Function Calling v2', 'run_date': '2026-02-23 02:21:10.182422', 'record_count': 5000, 'processed_count': 5000, 'validation_passed': 30, 'anomalies_found': 0, 'bias_findings': 3, 'status': 'SUCCESS'}
+[2026-02-23T02:21:10.190+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=glaive_data_pipeline, task_id=pipeline_summary, execution_date=20260223T022052, start_date=20260223T022110, end_date=20260223T022110
+[2026-02-23T02:21:10.221+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-23T02:21:10.227+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check

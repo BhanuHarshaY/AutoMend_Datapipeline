@@ -7,7 +7,7 @@ import json
 import logging
 import re
 from pathlib import Path
-
+from typing import Optional
 import pandas as pd
 
 # Logging 
@@ -152,7 +152,7 @@ def has_malformed_calls(calls: list) -> bool:
     return any("__malformed__" in c for c in calls)
 
 
-def process_record(record: dict) -> dict | None:
+def process_record(record: dict) -> Optional[dict]:
     """
     Process a single raw record into a structured format.
     Returns None if record is invalid.

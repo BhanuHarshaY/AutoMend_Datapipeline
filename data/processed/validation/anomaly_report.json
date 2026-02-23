@@ -1,0 +1,49 @@
+{
+  "total_checks": 6,
+  "anomalies_found": 0,
+  "pipeline_healthy": true,
+  "checks": [
+    {
+      "check": "malformed_rate",
+      "value": 0.0018,
+      "threshold": 0.05,
+      "is_anomaly": false,
+      "message": "OK"
+    },
+    {
+      "check": "none_complexity_rate",
+      "value": 0.4436,
+      "threshold": 0.6,
+      "is_anomaly": false,
+      "message": "OK"
+    },
+    {
+      "check": "record_count",
+      "value": 5000,
+      "threshold": 4000,
+      "is_anomaly": false,
+      "message": "OK"
+    },
+    {
+      "check": "avg_turns",
+      "value": 2.4126,
+      "threshold": 10.0,
+      "is_anomaly": false,
+      "message": "OK"
+    },
+    {
+      "check": "avg_calls",
+      "value": 0.746,
+      "threshold": 5.0,
+      "is_anomaly": false,
+      "message": "OK"
+    },
+    {
+      "check": "defined_functions_coverage",
+      "value": 0.5556,
+      "threshold": 0.3,
+      "is_anomaly": false,
+      "message": "OK"
+    }
+  ]
+}

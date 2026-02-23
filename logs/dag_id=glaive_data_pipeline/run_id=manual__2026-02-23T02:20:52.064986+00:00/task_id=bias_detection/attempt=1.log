@@ -1,0 +1,108 @@
+[2026-02-23T02:21:07.186+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: glaive_data_pipeline.bias_detection manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:07.188+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: glaive_data_pipeline.bias_detection manual__2026-02-23T02:20:52.064986+00:00 [queued]>
+[2026-02-23T02:21:07.188+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2026-02-23T02:21:07.192+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): bias_detection> on 2026-02-23 02:20:52.064986+00:00
+[2026-02-23T02:21:07.195+0000] {standard_task_runner.py:60} INFO - Started process 233 to run task
+[2026-02-23T02:21:07.196+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'glaive_data_pipeline', 'bias_detection', 'manual__2026-02-23T02:20:52.064986+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/glaive_pipeline_dag.py', '--cfg-path', '/tmp/tmpejdq7snx']
+[2026-02-23T02:21:07.197+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask bias_detection
+[2026-02-23T02:21:07.212+0000] {task_command.py:423} INFO - Running <TaskInstance: glaive_data_pipeline.bias_detection manual__2026-02-23T02:20:52.064986+00:00 [running]> on host 64e07737f5a7
+[2026-02-23T02:21:07.234+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='bhanu_harsha' AIRFLOW_CTX_DAG_ID='glaive_data_pipeline' AIRFLOW_CTX_TASK_ID='bias_detection' AIRFLOW_CTX_EXECUTION_DATE='2026-02-23T02:20:52.064986+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-23T02:20:52.064986+00:00'
+[2026-02-23T02:21:07.448+0000] {bias_detection.py:198} INFO - Loading processed data...
+[2026-02-23T02:21:07.519+0000] {bias_detection.py:200} INFO - Loaded 5000 records
+[2026-02-23T02:21:07.520+0000] {bias_detection.py:202} INFO - Engineering slice features...
+[2026-02-23T02:21:07.524+0000] {bias_detection.py:220} INFO - Analyzing slice: complexity_tier
+[2026-02-23T02:21:07.527+0000] {bias_detection.py:220} INFO - Analyzing slice: turn_bucket
+[2026-02-23T02:21:07.529+0000] {bias_detection.py:220} INFO - Analyzing slice: call_bucket
+[2026-02-23T02:21:07.530+0000] {bias_detection.py:220} INFO - Analyzing slice: has_error_handling
+[2026-02-23T02:21:07.531+0000] {bias_detection.py:220} INFO - Analyzing slice: has_parallel
+[2026-02-23T02:21:07.532+0000] {bias_detection.py:220} INFO - Analyzing slice: has_defined_functions
+[2026-02-23T02:21:07.533+0000] {bias_detection.py:229} INFO - Detecting representation bias...
+[2026-02-23T02:21:07.534+0000] {bias_detection.py:233} INFO - Found 3 bias findings
+[2026-02-23T02:21:07.534+0000] {logging_mixin.py:188} INFO - 
+============================================================
+[2026-02-23T02:21:07.534+0000] {logging_mixin.py:188} INFO -           BIAS DETECTION REPORT
+[2026-02-23T02:21:07.534+0000] {logging_mixin.py:188} INFO - ============================================================
+[2026-02-23T02:21:07.534+0000] {logging_mixin.py:188} INFO - 
+Slice: complexity_tier
+[2026-02-23T02:21:07.534+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.537+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+    complex    907      0.1814       2.64       2.05                False
+  malformed      7      0.0014       2.29       1.00                 True
+   moderate    517      0.1034       1.91       1.00                False
+       none   2218      0.4436       2.84       0.00                False
+     simple   1351      0.2702       1.75       1.00                False
+[2026-02-23T02:21:07.537+0000] {logging_mixin.py:188} INFO - 
+Slice: turn_bucket
+[2026-02-23T02:21:07.537+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.538+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+     single   1266      0.2532       1.00       0.51                False
+      short   2912      0.5824       2.32       1.05                False
+     medium    705      0.1410       4.71       0.05                False
+       long    117      0.0234       6.15       0.00                 True
+[2026-02-23T02:21:07.538+0000] {logging_mixin.py:188} INFO - 
+Slice: call_bucket
+[2026-02-23T02:21:07.538+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.539+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+   no_calls   2218      0.4436       2.84        0.0                False
+   one_call   1875      0.3750       1.80        1.0                False
+  two_calls    866      0.1732       2.62        2.0                False
+ many_calls     41      0.0082       3.02        3.0                 True
+[2026-02-23T02:21:07.539+0000] {logging_mixin.py:188} INFO - 
+Slice: has_error_handling
+[2026-02-23T02:21:07.539+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.540+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+      False   4663      0.9326       2.34       0.79                False
+       True    337      0.0674       3.41       0.09                False
+[2026-02-23T02:21:07.540+0000] {logging_mixin.py:188} INFO - 
+Slice: has_parallel
+[2026-02-23T02:21:07.540+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.540+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+      False   4093      0.8186       2.36       0.46                False
+       True    907      0.1814       2.64       2.05                False
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - 
+Slice: has_defined_functions
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - ----------------------------------------
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - slice_value  count  proportion  avg_turns  avg_calls  is_underrepresented
+      False   2222      0.4444       3.12       0.40                False
+       True   2778      0.5556       1.85       1.03                False
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - 
+============================================================
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - BIAS FINDINGS: 3 underrepresented slices detected
+[2026-02-23T02:21:07.541+0000] {logging_mixin.py:188} INFO - 
+  Severity : HIGH
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Slice    : complexity_tier = malformed
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Coverage : 0.14% (7 records)
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Action   : Slice 'malformed' in 'complexity_tier' represents only 0.14% of data. Consider oversampling or collecting more examples.
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO - 
+  Severity : MEDIUM
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Slice    : turn_bucket = long
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Coverage : 2.34% (117 records)
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Action   : Slice 'long' in 'turn_bucket' represents only 2.34% of data. Consider oversampling or collecting more examples.
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO - 
+  Severity : HIGH
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Slice    : call_bucket = many_calls
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Coverage : 0.82% (41 records)
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Action   : Slice 'many_calls' in 'call_bucket' represents only 0.82% of data. Consider oversampling or collecting more examples.
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO - 
+============================================================
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO - MITIGATION STRATEGIES:
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO - 
+  Slice    : complexity_tier = malformed
+[2026-02-23T02:21:07.542+0000] {logging_mixin.py:188} INFO -   Strategy : oversample
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO -   Detail   : Apply SMOTE or random oversampling to 'malformed' slice to bring representation above 5 percent threshold.
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO - 
+  Slice    : turn_bucket = long
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO -   Strategy : collect_more
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO -   Detail   : Collect additional examples for 'long' slice or apply sample weights during fine tuning.
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO - 
+  Slice    : call_bucket = many_calls
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO -   Strategy : oversample
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO -   Detail   : Apply SMOTE or random oversampling to 'many_calls' slice to bring representation above 5 percent threshold.
+[2026-02-23T02:21:07.543+0000] {logging_mixin.py:188} INFO - 
+============================================================
+[2026-02-23T02:21:07.546+0000] {bias_detection.py:256} INFO - Bias report saved to /opt/airflow/data/processed/validation/bias_report.json
+[2026-02-23T02:21:07.547+0000] {glaive_pipeline_dag.py:133} INFO - Bias detection: 3 findings across 6 slices
+[2026-02-23T02:21:07.553+0000] {python.py:202} INFO - Done. Returned value was: 3
+[2026-02-23T02:21:07.559+0000] {taskinstance.py:1149} INFO - Marking task as SUCCESS. dag_id=glaive_data_pipeline, task_id=bias_detection, execution_date=20260223T022052, start_date=20260223T022107, end_date=20260223T022107
+[2026-02-23T02:21:07.588+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 0
+[2026-02-23T02:21:07.598+0000] {taskinstance.py:3312} INFO - 1 downstream tasks scheduled from follow-on schedule check

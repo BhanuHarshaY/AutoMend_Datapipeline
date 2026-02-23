@@ -1,0 +1,29 @@
+[2026-02-23T01:50:46.383+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: glaive_data_pipeline.schema_validation manual__2026-02-23T01:32:05.715044+00:00 [queued]>
+[2026-02-23T01:50:46.386+0000] {taskinstance.py:1979} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: glaive_data_pipeline.schema_validation manual__2026-02-23T01:32:05.715044+00:00 [queued]>
+[2026-02-23T01:50:46.386+0000] {taskinstance.py:2193} INFO - Starting attempt 1 of 3
+[2026-02-23T01:50:46.389+0000] {taskinstance.py:2217} INFO - Executing <Task(PythonOperator): schema_validation> on 2026-02-23 01:32:05.715044+00:00
+[2026-02-23T01:50:46.391+0000] {standard_task_runner.py:60} INFO - Started process 255 to run task
+[2026-02-23T01:50:46.393+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'glaive_data_pipeline', 'schema_validation', 'manual__2026-02-23T01:32:05.715044+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/glaive_pipeline_dag.py', '--cfg-path', '/tmp/tmpdyqwhd6e']
+[2026-02-23T01:50:46.394+0000] {standard_task_runner.py:88} INFO - Job 13: Subtask schema_validation
+[2026-02-23T01:50:46.409+0000] {task_command.py:423} INFO - Running <TaskInstance: glaive_data_pipeline.schema_validation manual__2026-02-23T01:32:05.715044+00:00 [running]> on host a9a67f04a3ee
+[2026-02-23T01:50:46.426+0000] {taskinstance.py:2513} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='bhanu_harsha' AIRFLOW_CTX_DAG_ID='glaive_data_pipeline' AIRFLOW_CTX_TASK_ID='schema_validation' AIRFLOW_CTX_EXECUTION_DATE='2026-02-23T01:32:05.715044+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-02-23T01:32:05.715044+00:00'
+[2026-02-23T01:50:48.771+0000] {schema_validation.py:41} INFO - Converting DataFrame to GE dataset...
+[2026-02-23T01:50:48.772+0000] {taskinstance.py:2731} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 444, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 414, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 200, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 217, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/glaive_pipeline_dag.py", line 82, in task_schema_validation
+    results = run_validation(df)
+  File "/opt/airflow/scripts/schema_validation.py", line 42, in run_validation
+    ge_df = ge.from_pandas(df)
+AttributeError: module 'great_expectations' has no attribute 'from_pandas'
+[2026-02-23T01:50:48.779+0000] {taskinstance.py:1149} INFO - Marking task as UP_FOR_RETRY. dag_id=glaive_data_pipeline, task_id=schema_validation, execution_date=20260223T013205, start_date=20260223T015046, end_date=20260223T015048
+[2026-02-23T01:50:48.785+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 13 for task schema_validation (module 'great_expectations' has no attribute 'from_pandas'; 255)
+[2026-02-23T01:50:48.812+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2026-02-23T01:50:48.824+0000] {taskinstance.py:3312} INFO - 0 downstream tasks scheduled from follow-on schedule check
