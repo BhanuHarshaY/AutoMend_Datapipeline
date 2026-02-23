@@ -28,3 +28,8 @@ data/dvc_cache/
 
 # Mac
 .DS_Store
+
+# Coverage reports
+.coverage
+.coverage.*
+htmlcov/
